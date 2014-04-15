@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CycleCareModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="AddressID" />
+    </Key>
+    <Property Name="AddressID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstLine" Type="varchar" MaxLength="45" />
+    <Property Name="Town" Type="varchar" MaxLength="45" />
+    <Property Name="PostCode" Type="varchar" MaxLength="9" />
+    <Property Name="Comments" Type="varchar" MaxLength="100" />
+    <Property Name="Telephone" Type="int" Nullable="false" />
+    <Property Name="Mobile" Type="int" Nullable="false" />
+    <Property Name="Email" Type="int" />
+  </EntityType>
+  <EntityType Name="Bicycles">
+    <Key>
+      <PropertyRef Name="BicycleID" />
+    </Key>
+    <Property Name="BicycleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeID" Type="int" />
+    <Property Name="Make" Type="varchar" MaxLength="45" />
+    <Property Name="DateMake" Type="date" />
+    <Property Name="Comments" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="BicycleToCustomersMappings">
+    <Key>
+      <PropertyRef Name="MappingID" />
+    </Key>
+    <Property Name="MappingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BicycleID" Type="int" />
+    <Property Name="CustomerID" Type="int" />
+  </EntityType>
+  <EntityType Name="BicycleTypes">
+    <Key>
+      <PropertyRef Name="TypeID" />
+    </Key>
+    <Property Name="TypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="varchar" MaxLength="45" />
+  </EntityType>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="45" />
+    <Property Name="LastName" Type="varchar" MaxLength="45" />
+    <Property Name="AddressID" Type="int" Nullable="false" />
+    <Property Name="LastUpdate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Repairs">
+    <Key>
+      <PropertyRef Name="RepairID" />
+    </Key>
+    <Property Name="RepairID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BicycleID" Type="int" />
+    <Property Name="Price" Type="decimal" Precision="7" Scale="2" />
+    <Property Name="OrderDate" Type="datetime" />
+    <Property Name="DueDate" Type="datetime" />
+    <Property Name="Comments" Type="varchar" MaxLength="300" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'CycleCare.dbo.CustomerRepairs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="CustomerRepairs">
+    <Key>
+      <PropertyRef Name="Telephone" />
+      <PropertyRef Name="Mobile" />
+    </Key>
+    <Property Name="FirstName" Type="varchar" MaxLength="45" />
+    <Property Name="LastName" Type="varchar" MaxLength="45" />
+    <Property Name="Telephone" Type="int" Nullable="false" />
+    <Property Name="Mobile" Type="int" Nullable="false" />
+    <Property Name="Make" Type="varchar" MaxLength="45" />
+    <Property Name="DateMake" Type="date" />
+    <Property Name="BikeDetails" Type="varchar" MaxLength="200" />
+    <Property Name="OrderDate" Type="datetime" />
+    <Property Name="DueDate" Type="datetime" />
+    <Property Name="Price" Type="decimal" Precision="7" Scale="2" />
+    <Property Name="RepairDetails" Type="varchar" MaxLength="300" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'CycleCare.dbo.CustomersAddresses' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="CustomersAddresses">
+    <Key>
+      <PropertyRef Name="Telephone" />
+      <PropertyRef Name="Mobile" />
+    </Key>
+    <Property Name="FirstName" Type="varchar" MaxLength="45" />
+    <Property Name="LastName" Type="varchar" MaxLength="45" />
+    <Property Name="FirstLine" Type="varchar" MaxLength="45" />
+    <Property Name="Town" Type="varchar" MaxLength="45" />
+    <Property Name="PostCode" Type="varchar" MaxLength="9" />
+    <Property Name="Telephone" Type="int" Nullable="false" />
+    <Property Name="Mobile" Type="int" Nullable="false" />
+    <Property Name="Email" Type="int" />
+    <Property Name="Comments" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="BicycleToCustMappings_BicycleID_FK">
+    <End Role="Bicycles" Type="Self.Bicycles" Multiplicity="0..1" />
+    <End Role="BicycleToCustomersMappings" Type="Self.BicycleToCustomersMappings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bicycles">
+        <PropertyRef Name="BicycleID" />
+      </Principal>
+      <Dependent Role="BicycleToCustomersMappings">
+        <PropertyRef Name="BicycleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BicycleToCustMappings_CustomerID_FK">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+    <End Role="BicycleToCustomersMappings" Type="Self.BicycleToCustomersMappings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="BicycleToCustomersMappings">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Customers_AddressID_FK">
+    <End Role="Address" Type="Self.Address" Multiplicity="1" />
+    <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="AddressID" />
+      </Principal>
+      <Dependent Role="Customers">
+        <PropertyRef Name="AddressID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Repairs_BicycleID_FK">
+    <End Role="Bicycles" Type="Self.Bicycles" Multiplicity="0..1" />
+    <End Role="Repairs" Type="Self.Repairs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bicycles">
+        <PropertyRef Name="BicycleID" />
+      </Principal>
+      <Dependent Role="Repairs">
+        <PropertyRef Name="BicycleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CycleCareModelStoreContainer">
+    <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bicycles" EntityType="Self.Bicycles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BicycleToCustomersMappings" EntityType="Self.BicycleToCustomersMappings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BicycleTypes" EntityType="Self.BicycleTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Repairs" EntityType="Self.Repairs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CustomerRepairs" EntityType="Self.CustomerRepairs" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CustomerRepairs].[FirstName] AS [FirstName], 
+    [CustomerRepairs].[LastName] AS [LastName], 
+    [CustomerRepairs].[Telephone] AS [Telephone], 
+    [CustomerRepairs].[Mobile] AS [Mobile], 
+    [CustomerRepairs].[Make] AS [Make], 
+    [CustomerRepairs].[DateMake] AS [DateMake], 
+    [CustomerRepairs].[BikeDetails] AS [BikeDetails], 
+    [CustomerRepairs].[OrderDate] AS [OrderDate], 
+    [CustomerRepairs].[DueDate] AS [DueDate], 
+    [CustomerRepairs].[Price] AS [Price], 
+    [CustomerRepairs].[RepairDetails] AS [RepairDetails]
+    FROM [dbo].[CustomerRepairs] AS [CustomerRepairs]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="CustomersAddresses" EntityType="Self.CustomersAddresses" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CustomersAddresses].[FirstName] AS [FirstName], 
+    [CustomersAddresses].[LastName] AS [LastName], 
+    [CustomersAddresses].[FirstLine] AS [FirstLine], 
+    [CustomersAddresses].[Town] AS [Town], 
+    [CustomersAddresses].[PostCode] AS [PostCode], 
+    [CustomersAddresses].[Telephone] AS [Telephone], 
+    [CustomersAddresses].[Mobile] AS [Mobile], 
+    [CustomersAddresses].[Email] AS [Email], 
+    [CustomersAddresses].[Comments] AS [Comments]
+    FROM [dbo].[CustomersAddresses] AS [CustomersAddresses]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="BicycleToCustMappings_BicycleID_FK" Association="Self.BicycleToCustMappings_BicycleID_FK">
+      <End Role="Bicycles" EntitySet="Bicycles" />
+      <End Role="BicycleToCustomersMappings" EntitySet="BicycleToCustomersMappings" />
+    </AssociationSet>
+    <AssociationSet Name="BicycleToCustMappings_CustomerID_FK" Association="Self.BicycleToCustMappings_CustomerID_FK">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="BicycleToCustomersMappings" EntitySet="BicycleToCustomersMappings" />
+    </AssociationSet>
+    <AssociationSet Name="Customers_AddressID_FK" Association="Self.Customers_AddressID_FK">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="Customers" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="Repairs_BicycleID_FK" Association="Self.Repairs_BicycleID_FK">
+      <End Role="Bicycles" EntitySet="Bicycles" />
+      <End Role="Repairs" EntitySet="Repairs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

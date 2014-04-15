@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CycleCareModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="CycleCareEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Addresses" EntityType="CycleCareModel.Address" />
+    <EntitySet Name="Customers" EntityType="CycleCareModel.Customer" />
+    <EntitySet Name="Repairs" EntityType="CycleCareModel.Repair" />
+    <EntitySet Name="Sales" EntityType="CycleCareModel.Sale" />
+    <EntitySet Name="CustomerAddresses" EntityType="CycleCareModel.CustomerAddress" />
+    <EntitySet Name="CustomerRepairs" EntityType="CycleCareModel.CustomerRepair" />
+    <EntitySet Name="CustomerSales" EntityType="CycleCareModel.CustomerSale" />
+    <AssociationSet Name="Customers_AddressID_FK" Association="CycleCareModel.Customers_AddressID_FK">
+      <End Role="Address" EntitySet="Addresses" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="Repairs_CustomerID_FK" Association="CycleCareModel.Repairs_CustomerID_FK">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Repair" EntitySet="Repairs" />
+    </AssociationSet>
+    <AssociationSet Name="Sales_CustomerID_FK" Association="CycleCareModel.Sales_CustomerID_FK">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Sale" EntitySet="Sales" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="AddressID" />
+    </Key>
+    <Property Name="AddressID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstLine" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="SecondLine" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="Town" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="PostCode" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="TelNumber" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Comments" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Customers" Relationship="CycleCareModel.Customers_AddressID_FK" FromRole="Address" ToRole="Customer" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="AddressID" Type="Int32" Nullable="false" />
+    <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Address" Relationship="CycleCareModel.Customers_AddressID_FK" FromRole="Customer" ToRole="Address" />
+    <NavigationProperty Name="Repairs" Relationship="CycleCareModel.Repairs_CustomerID_FK" FromRole="Customer" ToRole="Repair" />
+    <NavigationProperty Name="Sales" Relationship="CycleCareModel.Sales_CustomerID_FK" FromRole="Customer" ToRole="Sale" />
+  </EntityType>
+  <EntityType Name="Repair">
+    <Key>
+      <PropertyRef Name="RepairID" />
+    </Key>
+    <Property Name="RepairID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerID" Type="Int32" />
+    <Property Name="Bicycle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Decimal" Precision="7" Scale="2" />
+    <Property Name="OrderDate" Type="DateTime" Precision="3" />
+    <Property Name="DueDate" Type="DateTime" Precision="3" />
+    <Property Name="Comments" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Customer" Relationship="CycleCareModel.Repairs_CustomerID_FK" FromRole="Repair" ToRole="Customer" />
+    <Property Name="Completed" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Sale">
+    <Key>
+      <PropertyRef Name="SaleID" />
+    </Key>
+    <Property Name="SaleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerID" Type="Int32" />
+    <Property Name="ItemName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FrameNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Decimal" Precision="7" Scale="2" />
+    <Property Name="SaleDate" Type="DateTime" Precision="3" />
+    <Property Name="Comments" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Customer" Relationship="CycleCareModel.Sales_CustomerID_FK" FromRole="Sale" ToRole="Customer" />
+  </EntityType>
+  <EntityType Name="CustomerAddress">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+      <PropertyRef Name="AddressID" />
+    </Key>
+    <Property Name="CustomerID" Type="Int32" Nullable="false" />
+    <Property Name="AddressID" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="TelNumber" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="FirstLine" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="SecondLine" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="Town" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="PostCode" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="CustomerRepair">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+      <PropertyRef Name="AddressID" />
+      <PropertyRef Name="RepairID" />
+    </Key>
+    <Property Name="CustomerID" Type="Int32" Nullable="false" />
+    <Property Name="AddressID" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="TelNumber" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="FirstLine" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="SecondLine" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="Town" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="PostCode" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Bicycle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="OrderDate" Type="DateTime" Precision="3" />
+    <Property Name="DueDate" Type="DateTime" Precision="3" />
+    <Property Name="Price" Type="Decimal" Precision="7" Scale="2" />
+    <Property Name="Comments" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="Completed" Type="Boolean" />
+    <Property Name="RepairID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CustomerSale">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+      <PropertyRef Name="AddressID" />
+    </Key>
+    <Property Name="CustomerID" Type="Int32" Nullable="false" />
+    <Property Name="AddressID" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="TelNumber" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="FirstLine" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="SecondLine" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="Town" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="PostCode" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SaleDate" Type="DateTime" Precision="3" />
+    <Property Name="ItemName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FrameNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Decimal" Precision="7" Scale="2" />
+    <Property Name="Comments" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="Customers_AddressID_FK">
+    <End Type="CycleCareModel.Address" Role="Address" Multiplicity="1" />
+    <End Type="CycleCareModel.Customer" Role="Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="AddressID" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="AddressID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Repairs_CustomerID_FK">
+    <End Type="CycleCareModel.Customer" Role="Customer" Multiplicity="0..1" />
+    <End Type="CycleCareModel.Repair" Role="Repair" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Repair">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Sales_CustomerID_FK">
+    <End Type="CycleCareModel.Customer" Role="Customer" Multiplicity="0..1" />
+    <End Type="CycleCareModel.Sale" Role="Sale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Sale">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

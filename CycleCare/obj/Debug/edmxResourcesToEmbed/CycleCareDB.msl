@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CycleCareModelStoreContainer" CdmEntityContainer="CycleCareEntities">
+    <EntitySetMapping Name="Addresses">
+      <EntityTypeMapping TypeName="CycleCareModel.Address">
+        <MappingFragment StoreEntitySet="Address">
+          <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+          <ScalarProperty Name="FirstLine" ColumnName="FirstLine" />
+          <ScalarProperty Name="Town" ColumnName="Town" />
+          <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bicycles">
+      <EntityTypeMapping TypeName="CycleCareModel.Bicycle">
+        <MappingFragment StoreEntitySet="Bicycles">
+          <ScalarProperty Name="BicycleID" ColumnName="BicycleID" />
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+          <ScalarProperty Name="Make" ColumnName="Make" />
+          <ScalarProperty Name="DateMake" ColumnName="DateMake" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BicycleToCustomersMappings">
+      <EntityTypeMapping TypeName="CycleCareModel.BicycleToCustomersMapping">
+        <MappingFragment StoreEntitySet="BicycleToCustomersMappings">
+          <ScalarProperty Name="MappingID" ColumnName="MappingID" />
+          <ScalarProperty Name="BicycleID" ColumnName="BicycleID" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BicycleTypes">
+      <EntityTypeMapping TypeName="CycleCareModel.BicycleType">
+        <MappingFragment StoreEntitySet="BicycleTypes">
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="CycleCareModel.Customer">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Repairs">
+      <EntityTypeMapping TypeName="CycleCareModel.Repair">
+        <MappingFragment StoreEntitySet="Repairs">
+          <ScalarProperty Name="RepairID" ColumnName="RepairID" />
+          <ScalarProperty Name="BicycleID" ColumnName="BicycleID" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerRepairs">
+      <EntityTypeMapping TypeName="CycleCareModel.CustomerRepair">
+        <MappingFragment StoreEntitySet="CustomerRepairs">
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Make" ColumnName="Make" />
+          <ScalarProperty Name="DateMake" ColumnName="DateMake" />
+          <ScalarProperty Name="BikeDetails" ColumnName="BikeDetails" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="RepairDetails" ColumnName="RepairDetails" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomersAddresses">
+      <EntityTypeMapping TypeName="CycleCareModel.CustomersAddress">
+        <MappingFragment StoreEntitySet="CustomersAddresses">
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstLine" ColumnName="FirstLine" />
+          <ScalarProperty Name="Town" ColumnName="Town" />
+          <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

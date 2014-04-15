@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CycleCareModelStoreContainer" CdmEntityContainer="CycleCareEntities">
+    <EntitySetMapping Name="Addresses">
+      <EntityTypeMapping TypeName="CycleCareModel.Address">
+        <MappingFragment StoreEntitySet="Addresses">
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="TelNumber" ColumnName="TelNumber" />
+          <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+          <ScalarProperty Name="Town" ColumnName="Town" />
+          <ScalarProperty Name="SecondLine" ColumnName="SecondLine" />
+          <ScalarProperty Name="FirstLine" ColumnName="FirstLine" />
+          <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="CycleCareModel.Customer">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Repairs">
+      <EntityTypeMapping TypeName="CycleCareModel.Repair">
+        <MappingFragment StoreEntitySet="Repairs">
+          <ScalarProperty Name="Completed" ColumnName="Completed" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Bicycle" ColumnName="Bicycle" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="RepairID" ColumnName="RepairID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sales">
+      <EntityTypeMapping TypeName="CycleCareModel.Sale">
+        <MappingFragment StoreEntitySet="Sales">
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="FrameNo" ColumnName="FrameNo" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="SaleID" ColumnName="SaleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerAddresses">
+      <EntityTypeMapping TypeName="CycleCareModel.CustomerAddress">
+        <MappingFragment StoreEntitySet="CustomerAddresses">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+          <ScalarProperty Name="Town" ColumnName="Town" />
+          <ScalarProperty Name="SecondLine" ColumnName="SecondLine" />
+          <ScalarProperty Name="FirstLine" ColumnName="FirstLine" />
+          <ScalarProperty Name="TelNumber" ColumnName="TelNumber" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerRepairs">
+      <EntityTypeMapping TypeName="CycleCareModel.CustomerRepair">
+        <MappingFragment StoreEntitySet="CustomerRepairs">
+          <ScalarProperty Name="RepairID" ColumnName="RepairID" />
+          <ScalarProperty Name="Completed" ColumnName="Completed" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="Bicycle" ColumnName="Bicycle" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+          <ScalarProperty Name="Town" ColumnName="Town" />
+          <ScalarProperty Name="SecondLine" ColumnName="SecondLine" />
+          <ScalarProperty Name="FirstLine" ColumnName="FirstLine" />
+          <ScalarProperty Name="TelNumber" ColumnName="TelNumber" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerSales">
+      <EntityTypeMapping TypeName="CycleCareModel.CustomerSale">
+        <MappingFragment StoreEntitySet="CustomerSales">
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="FrameNo" ColumnName="FrameNo" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+          <ScalarProperty Name="Town" ColumnName="Town" />
+          <ScalarProperty Name="SecondLine" ColumnName="SecondLine" />
+          <ScalarProperty Name="FirstLine" ColumnName="FirstLine" />
+          <ScalarProperty Name="TelNumber" ColumnName="TelNumber" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

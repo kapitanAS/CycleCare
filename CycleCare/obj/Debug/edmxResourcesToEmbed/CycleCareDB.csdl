@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CycleCareModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="AddressID" />
+    </Key>
+    <Property Name="AddressID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstLine" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="Town" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="PostCode" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="Comments" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Telephone" Type="Int32" Nullable="false" />
+    <Property Name="Mobile" Type="Int32" Nullable="false" />
+    <Property Name="Email" Type="Int32" />
+    <NavigationProperty Name="Customers" Relationship="Self.Customers_AddressID_FK" FromRole="Address" ToRole="Customers" />
+  </EntityType>
+  <EntityType Name="Bicycle">
+    <Key>
+      <PropertyRef Name="BicycleID" />
+    </Key>
+    <Property Name="BicycleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeID" Type="Int32" />
+    <Property Name="Make" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="DateMake" Type="DateTime" Precision="0" />
+    <Property Name="Comments" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="BicycleToCustomersMappings" Relationship="Self.BicycleToCustMappings_BicycleID_FK" FromRole="Bicycles" ToRole="BicycleToCustomersMappings" />
+    <NavigationProperty Name="Repairs" Relationship="Self.Repairs_BicycleID_FK" FromRole="Bicycles" ToRole="Repairs" />
+  </EntityType>
+  <EntityType Name="BicycleToCustomersMapping">
+    <Key>
+      <PropertyRef Name="MappingID" />
+    </Key>
+    <Property Name="MappingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BicycleID" Type="Int32" />
+    <Property Name="CustomerID" Type="Int32" />
+    <NavigationProperty Name="Bicycle" Relationship="Self.BicycleToCustMappings_BicycleID_FK" FromRole="BicycleToCustomersMappings" ToRole="Bicycles" />
+    <NavigationProperty Name="Customer" Relationship="Self.BicycleToCustMappings_CustomerID_FK" FromRole="BicycleToCustomersMappings" ToRole="Customers" />
+  </EntityType>
+  <EntityType Name="BicycleType">
+    <Key>
+      <PropertyRef Name="TypeID" />
+    </Key>
+    <Property Name="TypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="AddressID" Type="Int32" Nullable="false" />
+    <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Address" Relationship="Self.Customers_AddressID_FK" FromRole="Customers" ToRole="Address" />
+    <NavigationProperty Name="BicycleToCustomersMappings" Relationship="Self.BicycleToCustMappings_CustomerID_FK" FromRole="Customers" ToRole="BicycleToCustomersMappings" />
+  </EntityType>
+  <EntityType Name="Repair">
+    <Key>
+      <PropertyRef Name="RepairID" />
+    </Key>
+    <Property Name="RepairID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BicycleID" Type="Int32" />
+    <Property Name="Price" Type="Decimal" Precision="7" Scale="2" />
+    <Property Name="OrderDate" Type="DateTime" Precision="3" />
+    <Property Name="DueDate" Type="DateTime" Precision="3" />
+    <Property Name="Comments" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Bicycle" Relationship="Self.Repairs_BicycleID_FK" FromRole="Repairs" ToRole="Bicycles" />
+  </EntityType>
+  <EntityType Name="CustomerRepair">
+    <Key>
+      <PropertyRef Name="Telephone" />
+      <PropertyRef Name="Mobile" />
+    </Key>
+    <Property Name="FirstName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="Telephone" Type="Int32" Nullable="false" />
+    <Property Name="Mobile" Type="Int32" Nullable="false" />
+    <Property Name="Make" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="DateMake" Type="DateTime" Precision="0" />
+    <Property Name="BikeDetails" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="OrderDate" Type="DateTime" Precision="3" />
+    <Property Name="DueDate" Type="DateTime" Precision="3" />
+    <Property Name="Price" Type="Decimal" Precision="7" Scale="2" />
+    <Property Name="RepairDetails" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="CustomersAddress">
+    <Key>
+      <PropertyRef Name="Telephone" />
+      <PropertyRef Name="Mobile" />
+    </Key>
+    <Property Name="FirstName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="FirstLine" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="Town" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="PostCode" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="Telephone" Type="Int32" Nullable="false" />
+    <Property Name="Mobile" Type="Int32" Nullable="false" />
+    <Property Name="Email" Type="Int32" />
+    <Property Name="Comments" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="Customers_AddressID_FK">
+    <End Role="Address" Type="Self.Address" Multiplicity="1" />
+    <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="AddressID" />
+      </Principal>
+      <Dependent Role="Customers">
+        <PropertyRef Name="AddressID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BicycleToCustMappings_BicycleID_FK">
+    <End Role="Bicycles" Type="Self.Bicycle" Multiplicity="0..1" />
+    <End Role="BicycleToCustomersMappings" Type="Self.BicycleToCustomersMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bicycles">
+        <PropertyRef Name="BicycleID" />
+      </Principal>
+      <Dependent Role="BicycleToCustomersMappings">
+        <PropertyRef Name="BicycleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Repairs_BicycleID_FK">
+    <End Role="Bicycles" Type="Self.Bicycle" Multiplicity="0..1" />
+    <End Role="Repairs" Type="Self.Repair" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bicycles">
+        <PropertyRef Name="BicycleID" />
+      </Principal>
+      <Dependent Role="Repairs">
+        <PropertyRef Name="BicycleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BicycleToCustMappings_CustomerID_FK">
+    <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="BicycleToCustomersMappings" Type="Self.BicycleToCustomersMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="BicycleToCustomersMappings">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CycleCareEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Addresses" EntityType="Self.Address" />
+    <EntitySet Name="Bicycles" EntityType="Self.Bicycle" />
+    <EntitySet Name="BicycleToCustomersMappings" EntityType="Self.BicycleToCustomersMapping" />
+    <EntitySet Name="BicycleTypes" EntityType="Self.BicycleType" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="Repairs" EntityType="Self.Repair" />
+    <EntitySet Name="CustomerRepairs" EntityType="Self.CustomerRepair" />
+    <EntitySet Name="CustomersAddresses" EntityType="Self.CustomersAddress" />
+    <AssociationSet Name="Customers_AddressID_FK" Association="Self.Customers_AddressID_FK">
+      <End Role="Address" EntitySet="Addresses" />
+      <End Role="Customers" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="BicycleToCustMappings_BicycleID_FK" Association="Self.BicycleToCustMappings_BicycleID_FK">
+      <End Role="Bicycles" EntitySet="Bicycles" />
+      <End Role="BicycleToCustomersMappings" EntitySet="BicycleToCustomersMappings" />
+    </AssociationSet>
+    <AssociationSet Name="Repairs_BicycleID_FK" Association="Self.Repairs_BicycleID_FK">
+      <End Role="Bicycles" EntitySet="Bicycles" />
+      <End Role="Repairs" EntitySet="Repairs" />
+    </AssociationSet>
+    <AssociationSet Name="BicycleToCustMappings_CustomerID_FK" Association="Self.BicycleToCustMappings_CustomerID_FK">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="BicycleToCustomersMappings" EntitySet="BicycleToCustomersMappings" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

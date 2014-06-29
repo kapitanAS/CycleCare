@@ -14,6 +14,7 @@ namespace Main
     /// <summary>
     /// Interaction logic for ClientSearchWindow.xaml
     /// </summary>
+    /// Here is a short comment to make
     public partial class ClientSearchWindow : Window
     {
         CycleCareEntities cycleCare = new CycleCareEntities();

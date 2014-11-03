@@ -38,7 +38,7 @@ namespace Main
 
         private void addOrderButton_Click(object sender, RoutedEventArgs e)
         {
-            new OrderWindow().Show();
+            new AddOrderWindow().Show();
 
         }
 

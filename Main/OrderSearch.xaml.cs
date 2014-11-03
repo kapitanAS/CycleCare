@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.Entity;
+using Main.Classes;
 
 namespace Main
 {
@@ -23,44 +24,37 @@ namespace Main
 
     public partial class OrderSearch : Window
     {
-        CycleCareEntities cycleCare = new CycleCareEntities();
-        List<CustomerRepair> openRepairsList;
+        List<Order> openRepairsList;
 
         public OrderSearch()
         {
-            openRepairsList = new List<CustomerRepair>();
+            openRepairsList = new List<Order>();
             InitializeComponent();
 
         }
 
         private void openOrdersButton_Click(object sender, RoutedEventArgs e)
         {
-            List<CustomerRepair> openRepairsList = getOrders(false, lNameText.Text);
+            List<Order> openRepairsList = getOrders(false, lNameText.Text);
 
-        foreach (CustomerRepair repair in openRepairsList)
+        foreach (Order repair in openRepairsList)
             {
 
-               OrderWindow orderWindow = new OrderWindow(repair);
-               orderWindow.Activate();
-               orderWindow.Show();
+               AddOrderWindow addOrderWindow = new AddOrderWindow(repair);
+               addOrderWindow.Activate();
+               addOrderWindow.Show();
             }
         }
-        public List<CustomerRepair> getOrders(bool completed, string lName)
+        public List<Order> getOrders(bool completed, string lName)
         {   
-            DbSet<CustomerRepair> orders = cycleCare.CustomerRepairs;
-            string lastName = lName.ToLower();
-
-            var query = from od in orders
-                        where od.Completed == completed && od.LastName.ToLower().Contains(lastName)
-                        select od;
-         var openedRepairs = query.ToList();
-
-            return openedRepairs;
+            //TODO: Return orders from DB
+           throw new NotImplementedException();
+            //return openedRepairs;
     }            
      
         private void historicalOrdersButton_Click(object sender, RoutedEventArgs e)
         {
-        List<CustomerRepair> openRepairsList = getOrders(true, lNameText.Text);
+        List<Order> openRepairsList = getOrders(true, lNameText.Text);
 
         OrdersList.ItemsSource = openRepairsList;
         OrdersList.Columns[0].Visibility = System.Windows.Visibility.Hidden;
@@ -73,7 +67,7 @@ namespace Main
         OrdersList.Columns[9].Visibility = System.Windows.Visibility.Hidden;
         //foreach (CustomerRepair repair in openRepairsList)
         //    {
-        //       OrderWindow orderWindow = new OrderWindow(repair);
+        //       AddOrderWindow orderWindow = new AddOrderWindow(repair);
         //       orderWindow.Activate();
         //       orderWindow.Show();
         //    }
@@ -83,10 +77,10 @@ namespace Main
         {
             // take order from the list
             var item = OrdersList.CurrentCell.Item;
-            CustomerRepair historicalRepair = (CustomerRepair)item;
-            OrderWindow orderWindow = new OrderWindow(historicalRepair);
-            orderWindow.Activate();
-            orderWindow.Show(); 
+            Order historicalRepair = (Order)item;
+            AddOrderWindow addOrderWindow = new AddOrderWindow(historicalRepair);
+            addOrderWindow.Activate();
+            addOrderWindow.Show(); 
 
         }
         }

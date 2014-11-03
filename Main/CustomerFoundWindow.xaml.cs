@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Main.Classes;
 
 namespace Main
 {
@@ -21,13 +22,13 @@ namespace Main
     /// </summary>
     public partial class CustomerFoundWindow : Window
     {
-        
+        //TODO: Practically all. Double check that List is of a vaild type
         Customer Customer;
         Address Address;
-        List<CustomerAddress> SameNamesList;
+        List<Customer> SameNamesList;
         AddClient ParentWindow;
 
-        public CustomerFoundWindow(Customer customer, Address address, List<CustomerAddress> sameNameInDB, AddClient c)
+        public CustomerFoundWindow(Customer customer, Address address, List<Customer> sameNameInDB, AddClient c)
         {
             InitializeComponent();
             this.Customer = customer;
@@ -51,12 +52,8 @@ namespace Main
 
         private void saveAnywayButton_Click(object sender, RoutedEventArgs e)
         {
-            CycleCareEntities cycleCare = new CycleCareEntities();
-            DbSet<Customer> customer = cycleCare.Customers;
-            DbSet<Address> address = cycleCare.Addresses;
-            customer.Add(Customer);
-            address.Add(Address);
-            cycleCare.SaveChanges();
+
+            saveChangesSQL();
             clientNameLabel.Content = "CLIENT SAVED!";
             Thread.Sleep(2000);
             this.Close();
@@ -64,5 +61,10 @@ namespace Main
             
             
         }
+
+       private bool saveChangesSQL()
+       {
+          throw new NotImplementedException();
+       }
     }
 }

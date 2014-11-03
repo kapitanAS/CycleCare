@@ -40,6 +40,10 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files (x86)\NUnit 2.6.3\bin\framework\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -65,41 +69,15 @@
     <Compile Include="AddClient.xaml.cs">
       <DependentUpon>AddClient.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Address.cs">
-      <DependentUpon>CycleCareDB.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Classes\Address.cs" />
+    <Compile Include="Classes\Customer.cs" />
+    <Compile Include="Classes\Order.cs" />
+    <Compile Include="Classes\Sale.cs" />
     <Compile Include="ClientSearchWindow.xaml.cs">
       <DependentUpon>ClientSearchWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Customer.cs">
-      <DependentUpon>CycleCareDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CustomerAddress.cs">
-      <DependentUpon>CycleCareDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="CustomerFoundWindow.xaml.cs">
       <DependentUpon>CustomerFoundWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CustomerRepair.cs">
-      <DependentUpon>CycleCareDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CustomerSale.cs">
-      <DependentUpon>CycleCareDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CycleCareDB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CycleCareDB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CycleCareDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CycleCareDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CycleCareDB.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CycleCareDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="ExistingCustomerWindow.xaml.cs">
       <DependentUpon>ExistingCustomerWindow.xaml</DependentUpon>
@@ -107,15 +85,12 @@
     <Compile Include="OrderSearch.xaml.cs">
       <DependentUpon>OrderSearch.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OrderWindow.xaml.cs">
-      <DependentUpon>OrderWindow.xaml</DependentUpon>
+    <Compile Include="AddOrderWindow.xaml.cs">
+      <DependentUpon>AddOrderWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Repair.cs">
-      <DependentUpon>CycleCareDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Sale.cs">
-      <DependentUpon>CycleCareDB.tt</DependentUpon>
-    </Compile>
+    <Compile Include="SqlAccess.cs" />
+    <Compile Include="Testing\CustomerTests.cs" />
+    <Compile Include="Testing\TestHelpers.cs" />
     <Page Include="AddClient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -148,7 +123,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="OrderWindow.xaml">
+    <Page Include="AddOrderWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -171,24 +146,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="CycleCareDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CycleCareDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="CycleCareDB.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CycleCareDB.edmx</DependentUpon>
-      <LastGenOutput>CycleCareDB.Context.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="CycleCareDB.edmx.diagram">
-      <DependentUpon>CycleCareDB.edmx</DependentUpon>
-    </None>
-    <None Include="CycleCareDB.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CycleCareDB.edmx</DependentUpon>
-      <LastGenOutput>CycleCareDB.cs</LastGenOutput>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -202,6 +159,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

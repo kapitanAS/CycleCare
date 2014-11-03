@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Data.Entity;
 using System.Threading;
+using Main.Classes;
 
 namespace Main
 {
@@ -19,7 +20,6 @@ namespace Main
 
     public partial class AddClient : Window
     {
-        CycleCareEntities cycleCare = new CycleCareEntities();
 
         public AddClient()
         {
@@ -34,9 +34,8 @@ namespace Main
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
             saveButton.IsEnabled = false;
-            DbSet<Customer> customerDetails = cycleCare.Customers;
-            DbSet<Address> addressDetails = cycleCare.Addresses;
 
+           // TODO: find out what DBSet type is and if I could use it?
             Customer newCustomer = new Customer();
             Address newAddress = new Address();
             newCustomer.FirstName = firstNameText.Text;

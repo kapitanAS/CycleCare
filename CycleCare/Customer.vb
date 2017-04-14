@@ -19,5 +19,8 @@ Partial Public Class Customer
 
     Public Overridable Property Address As Address
     Public Overridable Property BicycleToCustomersMappings As ICollection(Of BicycleToCustomersMapping) = New HashSet(Of BicycleToCustomersMapping)
-
+	' dodaje tutaj nowa klase
+	' blah
+	' blah
+	' end
 End Class
